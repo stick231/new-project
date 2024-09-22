@@ -1,0 +1,15 @@
+{
+    "name": "stick231/notesproject",
+    "description": "new-project",
+    "require": {
+        "vlucas/phpdotenv": "^5.4",
+        "phroute/phroute": "^2.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Entities\\": "www/src/Entities/",
+            "Repository\\": "www/src/Repository/",
+            "Controllers\\": "www/src/Controllers/"
+        }
+    }
+}
