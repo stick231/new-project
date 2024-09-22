@@ -28,6 +28,11 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     }
 }
 
+if (isset($_SESSION['register_error'])) {
+    $response = $_SESSION['register_error'];
+    unset($_SESSION['register_error']); 
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
