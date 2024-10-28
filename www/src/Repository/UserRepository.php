@@ -11,7 +11,7 @@ class UserRepository implements UserRepositoryInterface {
         $this->pdo = $dataBase->getConnection();
     }
 
-    public function checkUserExists(User $user) {
+    private function checkUserExists(User $user) {
         try {
             $stmt = $this->pdo->prepare('SELECT * FROM users WHERE username = ?');
             $stmt->execute([$user->getUsername()]); 
