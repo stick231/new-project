@@ -4,12 +4,12 @@ session_start();
 
 use Controllers\AuthController;
 use Controllers\AuthMiddleWare;
+use Entities\Database;
 use Phroute\Phroute\Dispatcher;
 use Phroute\Phroute\RouteCollector;
+use Repository\UserRepository;
 
 $router = new RouteCollector();
-
-$authAction = new AuthController();
 
 $authMiddleWare = new AuthMiddleWare();
 
@@ -18,6 +18,10 @@ $router->get('/', function() use ($authMiddleWare){
 
     });
 });
+
+$dataBase = new Database();
+$userRepository = new UserRepository($dataBase);
+$authAction = new AuthController($userRepository);
 
 $router->any('/register', function() use ($authAction){
     $authAction->redirectToRegisterPage();
@@ -47,15 +51,4 @@ try {
     exit;
 }
 
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-
-</body>
-</html>
+require_once "src/Views/home-page.html";
