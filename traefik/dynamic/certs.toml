@@ -1,0 +1,7 @@
+[[tls.certificates]]
+  certFile = "/etc/certs/traefik.localhost.cert"
+  keyFile = "/etc/certs/traefik.localhost.key"
+
+[[tls.certificates]]
+  certFile = "/etc/certs/rtb.localhost.cert"
+  keyFile = "/etc/certs/rtb.localhost.key"

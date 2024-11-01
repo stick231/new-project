@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+DOMAIN="$@"
+mkcert -cert-file "./certs/$DOMAIN.localhost.cert" -key-file "./certs/$DOMAIN.localhost.key" "$DOMAIN.localhost" "*.$DOMAIN.localhost"

@@ -1,0 +1,17 @@
+networks:
+  traefik:
+    external: true
+
+services:
+  web:
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=traefik"
+      - "traefik.http.routers.darkhacks-api.rule=Host(`darkhacks.api.localhost`)"
+      - "traefik.http.routers.darkhacks-api.entrypoints=http"
+      - "traefik.http.routers.darkhacks-api-https.rule=Host(`darkhacks.api.localhost`)"
+      - "traefik.http.routers.darkhacks-api-https.entrypoints=https"
+      - "traefik.http.routers.darkhacks-api-https.tls=true"
+    networks:
+      - default
+      - traefik

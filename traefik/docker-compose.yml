@@ -1,0 +1,31 @@
+networks:
+  traefik:
+    name: traefik
+
+services:
+  traefik:
+    container_name: traefik
+    restart: unless-stopped
+    image: traefik:2.6
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=traefik"
+      - "traefik.http.routers.traefik.entrypoints=https"
+      - "traefik.http.routers.traefik.tls"
+      - "traefik.http.routers.traefik.rule=Host(`traefik.localhost`)"
+      - "traefik.http.routers.traefik.service=api@internal"
+
+    #      - "traefik.http.routers.globalredirect.rule=hostregexp(`{host:[a-z-.]+}`)"
+    #      - "traefik.http.routers.globalredirect.entrypoints=http"
+    #      - "traefik.http.routers.globalredirect.middlewares=redirect-to-https"
+    #      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
+    volumes:
+      - "./traefik.toml:/etc/traefik/traefik.toml:ro,cached"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "./dynamic:/etc/traefik/dynamic:ro"
+      - "./certs:/etc/certs:ro"
+    ports:
+      - "127.0.0.1:80:80"
+      - "127.0.0.1:443:443"
+    networks:
+      - traefik

@@ -1,0 +1,17 @@
+# laravel-worker и laravel-horizon не должны работать вместе
+[program:laravel-worker]
+command=php /app/artisan queue:work --sleep=3 --tries=3 --backoff=3 --max-time=3600
+process_name=%(program_name)s_%(process_num)02d
+autostart=true
+autorestart=true
+stopasgroup=true
+killasgroup=true
+user=devilbox
+numprocs=4
+stopwaitsecs=3600
+stdout_logfile          = /dev/stdout
+stdout_logfile_maxbytes = 0
+stdout_events_enabled   = true
+stderr_logfile          = /dev/stderr
+stderr_logfile_maxbytes = 0
+stderr_events_enabled   = true
